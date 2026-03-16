@@ -7,8 +7,9 @@ import qs.Modules.Plugins
 PluginComponent {
     id: root
 
-    popoutWidth: 820
-    popoutHeight: 560
+    // Slightly more compact default; popout is still resizable
+    popoutWidth: 720
+    popoutHeight: 500
 
     onPluginDataChanged: {
         SystemDoctorService.cpuThreshold = parseInt(pluginData.cpuThreshold) || 85;
