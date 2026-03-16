@@ -6,7 +6,7 @@ import qs.Widgets
 Column {
     id: root
 
-    spacing: Theme.spacingM
+    spacing: Theme.spacingS
 
     // --- Inline metric card component ---
     component MetricCard: Rectangle {
@@ -32,7 +32,7 @@ Column {
 
         Column {
             anchors.fill: parent
-            anchors.margins: Theme.spacingM
+            anchors.margins: Theme.spacingS
             spacing: Theme.spacingXS
 
             Row {
@@ -41,7 +41,7 @@ Column {
                 DankIcon {
                     name: card.icon
                     color: card.cardColor
-                    size: 18
+                    size: 16
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
@@ -55,15 +55,15 @@ Column {
 
             StyledText {
                 text: card.value.toFixed(0) + card.unit
-                font.pixelSize: 28
+                font.pixelSize: 22
                 font.weight: Font.Bold
                 color: card.cardColor
             }
 
             Rectangle {
                 width: parent.width
-                height: 6
-                radius: 3
+                height: 4
+                radius: 2
                 color: Theme.surfaceVariant
 
                 Rectangle {
@@ -92,7 +92,7 @@ Column {
     // --- Tab bar ---
     DankTabBar {
         id: tabBar
-        width: parent.width - Theme.spacingM * 2
+        width: parent.width - Theme.spacingS * 2
         anchors.horizontalCenter: parent.horizontalCenter
         currentIndex: 0
         model: [
@@ -110,17 +110,17 @@ Column {
     Item {
         visible: tabBar.currentIndex === 0
         width: parent.width
-        height: parent.height - tabBar.height - Theme.spacingM * 2
+        height: parent.height - tabBar.height - Theme.spacingS * 2
 
         Column {
             anchors.fill: parent
-            anchors.margins: Theme.spacingM
-            spacing: Theme.spacingM
+            anchors.margins: Theme.spacingS
+            spacing: Theme.spacingS
 
             // Health banner
             Rectangle {
                 width: parent.width
-                height: 48
+                height: 36
                 radius: Theme.cornerRadius
                 color: {
                     var s = SystemDoctorService.healthScore;
@@ -141,7 +141,7 @@ Column {
                             if (s >= 50) return "#FF9800";
                             return "#F44336";
                         }
-                        size: 22
+                        size: 18
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
@@ -149,7 +149,7 @@ Column {
                         anchors.verticalCenter: parent.verticalCenter
                         text: "System Health: " + SystemDoctorService.healthLabel
                               + "  (" + SystemDoctorService.healthScore + "/100)"
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSizeSmall
                         font.weight: Font.DemiBold
                         color: {
                             var s = SystemDoctorService.healthScore;
@@ -164,10 +164,10 @@ Column {
             // Metric cards grid
             GridLayout {
                 width: parent.width
-                height: parent.height - 48 - Theme.spacingM
+                height: parent.height - 36 - Theme.spacingS
                 columns: 2
-                columnSpacing: Theme.spacingM
-                rowSpacing: Theme.spacingM
+                columnSpacing: Theme.spacingS
+                rowSpacing: Theme.spacingS
 
                 MetricCard {
                     label: "CPU Usage"
@@ -212,17 +212,17 @@ Column {
     Item {
         visible: tabBar.currentIndex === 1
         width: parent.width
-        height: parent.height - tabBar.height - Theme.spacingM * 2
+        height: parent.height - tabBar.height - Theme.spacingS * 2
 
         Column {
             anchors.fill: parent
-            anchors.margins: Theme.spacingM
+            anchors.margins: Theme.spacingS
             spacing: Theme.spacingS
 
             // Header row
             Row {
                 width: parent.width
-                height: 28
+                height: 24
                 spacing: 0
 
                 StyledText {
@@ -270,14 +270,14 @@ Column {
 
             Flickable {
                 width: parent.width
-                height: parent.height - 29 - Theme.spacingS - 1
+                height: parent.height - 25 - Theme.spacingS - 1
                 contentHeight: procColumn.implicitHeight
                 clip: true
 
                 Column {
                     id: procColumn
                     width: parent.width
-                    spacing: 2
+                    spacing: 1
 
                     Repeater {
                         model: SystemDoctorService.topProcs
@@ -288,8 +288,8 @@ Column {
                             required property int index
 
                             width: procColumn.width
-                            height: 36
-                            radius: 6
+                            height: 30
+                            radius: 4
                             color: index % 2 === 0 ? "transparent" : Qt.rgba(Theme.surfaceVariant.r, Theme.surfaceVariant.g, Theme.surfaceVariant.b, 0.3)
 
                             Row {
@@ -378,11 +378,11 @@ Column {
     Item {
         visible: tabBar.currentIndex === 2
         width: parent.width
-        height: parent.height - tabBar.height - Theme.spacingM * 2
+        height: parent.height - tabBar.height - Theme.spacingS * 2
 
         Column {
             anchors.fill: parent
-            anchors.margins: Theme.spacingM
+            anchors.margins: Theme.spacingS
             spacing: Theme.spacingS
 
             Row {
@@ -422,7 +422,7 @@ Column {
                 Column {
                     id: logColumn
                     width: parent.width
-                    spacing: 2
+                    spacing: 1
 
                     Repeater {
                         model: SystemDoctorService.logErrors
@@ -477,6 +477,6 @@ Column {
     AiPanel {
         visible: tabBar.currentIndex === 3
         width: parent.width
-        height: parent.height - tabBar.height - Theme.spacingM * 2
+        height: parent.height - tabBar.height - Theme.spacingS * 2
     }
 }

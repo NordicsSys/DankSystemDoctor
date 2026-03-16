@@ -161,13 +161,13 @@ Item {
     // ─────────────────────────────────────────────
     Column {
         anchors.fill: parent
-        anchors.margins: Theme.spacingM
-        spacing: Theme.spacingM
+        anchors.margins: Theme.spacingS
+        spacing: Theme.spacingS
 
         // Context summary bar
         Rectangle {
             width: parent.width
-            height: 44
+            height: 36
             radius: Theme.cornerRadius
             color: Theme.surfaceContainerHigh
 
@@ -211,7 +211,7 @@ Item {
         Row {
             width: parent.width
             spacing: Theme.spacingS
-            height: 42
+            height: 36
 
             Rectangle {
                 width: parent.width - analyzeBtn.width - Theme.spacingS
@@ -323,7 +323,7 @@ Item {
                     id: fixRow
                     required property var modelData
                     width: parent.width
-                    height: 36
+                    height: 32
                     radius: 6
                     color: Theme.surfaceContainerHigh
 
@@ -367,10 +367,10 @@ Item {
         Flickable {
             id: responseFlick
             width: parent.width
-            height: parent.height - 44 - 42 - Theme.spacingM * 4
-                    - (root.isLoading ? 4 + Theme.spacingM : 0)
-                    - (root.errorMessage.length > 0 ? 40 + Theme.spacingM : 0)
-                    - (root.fixCommands.length > 0 ? root.fixCommands.length * 40 + 20 + Theme.spacingM : 0)
+            height: parent.height - 36 - 36 - Theme.spacingS * 4
+                    - (root.isLoading ? 4 + Theme.spacingS : 0)
+                    - (root.errorMessage.length > 0 ? 40 + Theme.spacingS : 0)
+                    - (root.fixCommands.length > 0 ? root.fixCommands.length * 32 + 20 + Theme.spacingS : 0)
             contentHeight: responseText.implicitHeight
             clip: true
             visible: root.aiResponse.length > 0 || !root.isLoading
