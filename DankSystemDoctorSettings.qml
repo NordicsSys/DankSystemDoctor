@@ -147,6 +147,28 @@ PluginSettings {
 
     StyledRect {
         width: parent.width
+        height: adaptiveCol.implicitHeight + Theme.spacingM * 2
+        radius: Theme.cornerRadius
+        color: Theme.surfaceContainerHigh
+        Column {
+            id: adaptiveCol
+            x: Theme.spacingM
+            y: Theme.spacingM
+            width: parent.width - Theme.spacingM * 2
+            spacing: Theme.spacingXS
+            StyledText { text: "Adaptive thresholds"; font.pixelSize: Theme.fontSizeSmall; font.weight: Font.DemiBold; color: Theme.surfaceText }
+            StyledText {
+                text: "Use historical baseline (avg + margin) instead of fixed numbers for alerts. No telemetry or PII; data stays local."
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.surfaceVariantText
+                wrapMode: Text.WordWrap
+                width: parent.width
+            }
+        }
+    }
+
+    StyledRect {
+        width: parent.width
         height: 1
         color: Theme.surfaceVariant
     }

@@ -55,39 +55,17 @@ Item {
 
     function buildContext() {
         var svc = SystemDoctorService;
-        var ctx = "You are a Linux system diagnostics expert. Analyze this system status and respond with:\n";
-        ctx += "1. A brief diagnosis of the problems (if any)\n";
-        ctx += "2. Specific fix commands in ```bash code blocks\n";
-        ctx += "3. Commands needing root access must start with: sudo\n\n";
-        ctx += "=== SYSTEM STATUS ===\n";
-        ctx += "CPU: " + svc.cpuPct.toFixed(0) + "%  (threshold: " + svc.cpuThreshold + "%)\n";
-        ctx += "RAM: " + svc.ramPct.toFixed(0) + "% — "
-               + svc.formatMb(svc.ramUsedMb) + " used / " + svc.formatMb(svc.ramTotalMb) + " total\n";
-        ctx += "Disk (/): " + svc.diskPct.toFixed(0) + "%\n";
-        ctx += "Temperature: " + (svc.tempC > 0 ? svc.tempC.toFixed(0) + "°C" : "N/A") + "\n";
-        ctx += "Health Score: " + svc.healthScore + "/100 (" + svc.healthLabel + ")\n\n";
-
-        if (svc.topProcs.length > 0) {
-            ctx += "=== TOP PROCESSES (CPU%) ===\n";
-            for (var i = 0; i < Math.min(6, svc.topProcs.length); i++) {
-                var p = svc.topProcs[i];
-                ctx += "  " + p.cmd + "  [CPU " + p.cpu.toFixed(1) + "%, RAM " + p.mem.toFixed(1) + "%]\n";
-            }
-            ctx += "\n";
-        }
-
-        if (svc.logErrors.length > 0) {
-            ctx += "=== RECENT SYSTEM ERRORS ===\n";
-            for (var j = 0; j < Math.min(10, svc.logErrors.length); j++) {
-                ctx += svc.logErrors[j] + "\n";
-            }
-            ctx += "\n";
-        }
-
+        var ctx = "You are a Linux system diagnostics expert. Keep responses concise. Use these triage playbooks when relevant:\n";
+        ctx += "- High CPU by process: suggest identifying the process (name/PID), then suggest restarting the service or killing if runaway.\n";
+        ctx += "- Memory leak suspicion: suggest checking top memory processes, restarting the offending service, or checking for OOM logs.\n";
+        ctx += "- Disk I/O contention: suggest checking iotop, reducing write-heavy apps, or moving swap to faster storage.\n";
+        ctx += "Respond with: 1) Brief diagnosis (if any); 2) Fix commands in ```bash code blocks (use sudo for root); 3) One-line remediation steps.\n\n";
+        ctx += "=== SYSTEM STATUS (summarized) ===\n";
+        ctx += svc.buildSummarizedContext(35);
+        ctx += "\n";
         if (root.customQuestion.trim().length > 0) {
             ctx += "=== USER QUESTION ===\n" + root.customQuestion.trim() + "\n";
         }
-
         return ctx;
     }
 
