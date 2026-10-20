@@ -2,6 +2,14 @@
 
 AI-powered system health monitor plugin for [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell). Tracks CPU, RAM, disk, GPU & temp in real-time, detects pending updates, and uses local AI ([Ollama](https://ollama.com)) to diagnose issues and suggest one-click fixes.
 
+## What this solves
+
+Bring resource usage, system logs, and maintenance controls into a single DankMaterialShell plugin. This project demonstrates Linux tooling, QML interfaces, background command integration, and local Ollama-assisted diagnostics.
+
+[Developer portfolio](https://nikaj.dev) · [Discuss Linux tooling](mailto:contact@nikaj.dev)
+
+Maintenance and suggested fixes can modify the system, and some use elevated privileges. Review the selected action and backup/snapshot options before running it; diagnostic suggestions are not a guarantee that a fix is appropriate.
+
 ## Features
 
 - **Live metrics** — CPU, RAM, disk usage and temperature, updated every 5 seconds; GPU (utilization, VRAM, temp) when `nvidia-smi` is available, polled every 15s
